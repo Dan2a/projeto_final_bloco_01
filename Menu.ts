@@ -15,13 +15,14 @@ export function main() {
         console.log("            2 - Listar Produtos                      ");
         console.log("            3 - Alterar Produto                      ");
         console.log("            4 - Excluir Produto                      ");
-        console.log("            5 - Sair                                 ");
+        console.log("            5 - Listar Produto por ID                ");
+        console.log("            6 - Sair                                 ");
         console.log("-----------------------------------------------------");
 
         console.log("Entre com a opção desejada: ");
         opcao = readlinesync.questionInt("");
 
-        if (opcao === 5) {
+        if (opcao === 6) {
             console.log("Saindo do sistema...");
             sobre();
             process.exit(0);
@@ -72,6 +73,19 @@ export function main() {
                 console.log("----- Excluindo produto -----");
                 const idExcluir = readlinesync.questionInt("Digite o ID do produto a ser excluido: ");
                 produtos.excluirProduto(idExcluir);
+
+                keyPress();
+                break;
+            case 5:
+                console.log("----- Buscando produto por ID -----");
+                const idBuscar = readlinesync.questionInt("Digite o ID do produto a ser buscado: ");
+                const produtoBuscado = produtos.buscarProdutoPorId(idBuscar);
+
+                if (produtoBuscado != null) {
+                    produtoBuscado.detalhesProduto();
+                } else {
+                    console.log(`Produto ID ${idBuscar} não encontrado!`);
+                }
 
                 keyPress();
                 break;

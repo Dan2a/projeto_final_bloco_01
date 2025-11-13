@@ -6,4 +6,7 @@ export interface IProdutoRepository {
     listarProdutos(): void;
     alterarProduto(produto: Produto): void;
     excluirProduto(id: number): void;
+
+    // Metodos auxiliares
+    buscarProdutoPorId(id: number): Produto | null;
 }

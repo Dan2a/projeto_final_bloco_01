@@ -12,7 +12,9 @@ O menu principal permite ao utilizador realizar as seguintes operações de gest
 * **2. Listar Produtos:** Exibe todos os produtos atualmente cadastrados.
 * **3. Alterar Produto:** Permite atualizar os dados de um produto existente, procurando-o pelo ID.
 * **4. Excluir Produto:** Remove um produto do sistema com base no seu ID.
-* **5. Sair:** Encerra a aplicação.
+* **5. Listar Produto por ID:** Busca e exibe os detalhes de um produto específico através do seu identificador único.
+* **6. Filtrar Produtos por Marca:** Permite listar todos os produtos de uma marca específica informada pelo utilizador.
+* **7. Sair:** Encerra a aplicação.
 
 ---
 
@@ -25,9 +27,9 @@ O projeto está organizado da seguinte forma:
     * `Produto.ts`: Classe abstrata base para todos os produtos.
     * `ProdutoEletronico.ts`: Classe que estende `Produto` com atributos específicos como voltagem e marca.
 * **`src/repository/`**: Define as interfaces para operações de dados.
-    * `IProdutoRepository.ts`: Interface que define o contrato para o CRUD de produtos (cadastrar, listar, alterar, excluir).
+    * `IProdutoRepository.ts`: Interface que define o contrato para o CRUD de produtos e métodos auxiliares de busca.
 * **`src/controller/`**: Implementa a lógica de negócios.
-    * `ProdutoController.ts`: Implementa `IProdutoRepository` e gere uma lista de produtos em memória. É responsável por criar, ler, atualizar e excluir produtos.
+    * `ProdutoController.ts`: Implementa `IProdutoRepository` e gere uma lista de produtos em memória. É responsável por criar, ler, atualizar, excluir e filtrar produtos.
 
 ---
 

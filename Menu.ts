@@ -1,13 +1,13 @@
+import { ProdutoController } from './src/controller/ProdutoController';
 import { ProdutoEletronico } from './src/model/ProdutoEletronico';
 import readlinesync = require("readline-sync");
 
 export function main() {
 
-    let opcao: number;
+    let produtos: ProdutoController = new ProdutoController();
 
-    // Exemplo de uso da classe ProdutoEletroco
-    const produtoEletroco: ProdutoEletronico = new ProdutoEletronico(1, "Geladeira", "Geladeira Frost Free 400L", 2500.00, 10, "220V", "Brastemp");
-    produtoEletroco.detalhesProduto();
+    let nome, descricao, voltagem, marca: string;
+    let opcao, preco, estoque: number;
 
     while (true) {
         console.log("-------------------- E-COMMERCE  --------------------");
@@ -29,23 +29,50 @@ export function main() {
 
         switch (opcao) {
             case 1:
-                console.log("Cadastrando produto...");
-                // Lógica para cadastrar produto
+                console.log("----- Cadastrando produto -----");
+                nome = readlinesync.question("Nome do produto: ");
+                descricao = readlinesync.question("Descricao do produto: ");
+                preco = readlinesync.questionFloat("Preco do produto: ");
+                estoque = readlinesync.questionInt("Estoque do produto: ");
+                voltagem = readlinesync.question("Voltagem do produto: ");
+                marca = readlinesync.question("Marca do produto: ");
+
+                produtos.cadastrarProduto(new ProdutoEletronico(0, nome, descricao, preco, estoque, voltagem, marca));
+
                 keyPress();
                 break;
             case 2:
-                console.log("Listando produtos...");
-                // Lógica para listar produtos
+                console.log("----- Listando produtos -----");
+                produtos.listarProdutos();
                 keyPress();
                 break;
             case 3:
-                console.log("Alterando produto...");
-                // Lógica para alterar produto
+                console.log("----- Alterando produto -----");
+                const idAlterar = readlinesync.questionInt("Digite o ID do produto a ser alterado: ");
+
+                const produtoExistente = produtos.buscarProdutoPorId(idAlterar);
+
+                if (produtoExistente != null) {
+                    nome = readlinesync.question("Nome do produto: ");
+                    descricao = readlinesync.question("Descricao do produto: ");
+                    preco = readlinesync.questionFloat("Preco do produto: ");
+                    estoque = readlinesync.questionInt("Estoque do produto: ");
+                    voltagem = readlinesync.question("Voltagem do produto: ");
+                    marca = readlinesync.question("Marca do produto: ");
+
+                    const produtoAtualizado = new ProdutoEletronico(idAlterar, nome, descricao, preco, estoque, voltagem, marca);
+                    produtos.alterarProduto(produtoAtualizado);
+                } else {
+                    console.log(`Produto ID ${idAlterar} não encontrado!`)
+                }
+
                 keyPress();
                 break;
             case 4:
-                console.log("Excluindo produto...");
-                // Lógica para excluir produto
+                console.log("----- Excluindo produto -----");
+                const idExcluir = readlinesync.questionInt("Digite o ID do produto a ser excluido: ");
+                produtos.excluirProduto(idExcluir);
+
                 keyPress();
                 break;
             default:
@@ -68,6 +95,7 @@ export function sobre(): void {
 function keyPress(): void {
     console.log("\nPressione enter para continuar...");
     readlinesync.prompt();
+    console.clear();
 }
 
 main();

@@ -9,4 +9,5 @@ export interface IProdutoRepository {
 
     // Metodos auxiliares
     buscarProdutoPorId(id: number): Produto | null;
+    listarProdutosPorMarca(marca: string): Produto[];
 }

@@ -1,8 +1,13 @@
+import { ProdutoEletronico } from './src/model/ProdutoEletronico';
 import readlinesync = require("readline-sync");
 
 export function main() {
 
     let opcao: number;
+
+    // Exemplo de uso da classe ProdutoEletroco
+    const produtoEletroco: ProdutoEletronico = new ProdutoEletronico(1, "Geladeira", "Geladeira Frost Free 400L", 2500.00, 10, "220V", "Brastemp");
+    produtoEletroco.detalhesProduto();
 
     while (true) {
         console.log("-------------------- E-COMMERCE  --------------------");

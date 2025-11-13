@@ -1,4 +1,5 @@
 import { Produto } from "../model/Produto";
+import { ProdutoEletronico } from "../model/ProdutoEletronico";
 import { IProdutoRepository } from "../repository/IProdutoRepository";
 
 export class ProdutoController implements IProdutoRepository {
@@ -53,4 +54,15 @@ export class ProdutoController implements IProdutoRepository {
         return produto ? produto : null;
     }
 
+    public listarProdutosPorMarca(marca: string): Produto[] {
+        const produtosFiltrados = this.listaProdutos.filter(produto => {
+            if (produto instanceof ProdutoEletronico) {
+                return produto.marca.toLowerCase() === marca.toLowerCase();
+            }
+
+            return false;
+        });
+
+        return produtosFiltrados;
+    }
 }

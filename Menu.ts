@@ -16,13 +16,14 @@ export function main() {
         console.log("            3 - Alterar Produto                      ");
         console.log("            4 - Excluir Produto                      ");
         console.log("            5 - Listar Produto por ID                ");
-        console.log("            6 - Sair                                 ");
+        console.log("            6 - Filtrar Produtos por Marca           ");
+        console.log("            7 - Sair                                 ");
         console.log("-----------------------------------------------------");
 
         console.log("Entre com a opção desejada: ");
         opcao = readlinesync.questionInt("");
 
-        if (opcao === 6) {
+        if (opcao === 7) {
             console.log("Saindo do sistema...");
             sobre();
             process.exit(0);
@@ -87,6 +88,20 @@ export function main() {
                     console.log(`Produto ID ${idBuscar} não encontrado!`);
                 }
 
+                keyPress();
+                break;
+            case 6:
+                console.log("----- Filtrando produtos por marca -----");
+                marca = readlinesync.question("Digite a marca a ser filtrada: ");
+                const produtosFiltrados = produtos.listarProdutosPorMarca(marca);
+
+                if (produtosFiltrados.length > 0) {
+                    produtosFiltrados.forEach(produto => {
+                        produto.detalhesProduto();
+                    });
+                } else {
+                    console.log(`Nenhum produto encontrado da marca ${marca}.`);
+                }
                 keyPress();
                 break;
             default:

@@ -18,6 +18,7 @@ export function main() {
 
         if (opcao === 5) {
             console.log("Saindo do sistema...");
+            sobre();
             process.exit(0);
         }
 
